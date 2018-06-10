@@ -100,7 +100,7 @@ void tickaudio() {
 
 extern uint64_t timinginterval;
 extern void inittiming();
-void fill_audio (void *udata, int8_t *stream, int len) {
+void fill_audio (void *udata, uint8_t *stream, int len) {
 	memcpy (stream, audbuf, len);
 	memmove (audbuf, &audbuf[len], usebuffersize - len);
 
