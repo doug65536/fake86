@@ -1,19 +1,19 @@
 SRCFILES=src/fake86/*.c
 BINPATH=/usr/bin
 DATAPATH=/usr/share/fake86
-CFLAGS=-O2 -DPATH_DATAFILES=\"$(DATAPATH)/\"
+CFLAGS=-O0 -DPATH_DATAFILES=\"$(DATAPATH)/\" -ggdb -Wall -Wextra -Wpedantic
 INCLUDE=-Isrc/fake86
-LIBS=-lpthread
+LIBS=-lpthread -lX11
 SDLFLAGS=`sdl-config --cflags --libs`
 
-all: fake86-src imagegen-src
+all: bin/fake86 bin/imagegen
 
-fake86-src:
+bin/fake86: $(SRCFILES) makefile
 	$(CC) $(SRCFILES) -o bin/fake86 $(CFLAGS) $(INCLUDE) $(LIBS) $(SDLFLAGS)
 	chmod a+x bin/fake86
 
-imagegen-src:
-	$(CC) src/imagegen/imagegen.c -o bin/imagegen $(CFLAGS)
+bin/imagegen: src/imagegen/imagegen.c makefile
+	$(CC) -o bin/imagegen $(CFLAGS) src/imagegen/imagegen.c
 	chmod a+x bin/imagegen
 
 install:
@@ -38,3 +38,10 @@ clean:
 uninstall:
 	rm -f $(BINPATH)/fake86
 	rm -f $(BINPATH)/imagegen
+	rm -f $(DATAPATH)/asciivga.dat
+	rm -f $(DATAPATH)/pcxtbios.bin
+	rm -f $(DATAPATH)/videorom.bin
+	rm -f $(DATAPATH)/rombasic.bin
+	rmdir $(DATAPATH)
+
+.PHONY: all install clean uninstall
