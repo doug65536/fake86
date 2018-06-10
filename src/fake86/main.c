@@ -28,12 +28,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#include <inttypes.h>
 #include "mutex.h"
 #ifdef _WIN32
 CRITICAL_SECTION screenmutex;
 #else
 #ifndef __APPLE__
 #include <X11/Xlib.h>
+#include <unistd.h>
 #endif
 pthread_t consolethread;
 #endif
@@ -91,7 +93,7 @@ uint32_t loadrom (uint32_t addr32, uint8_t *filename, uint8_t failure_fatal) {
 			return (0);
 		}
 	else {
-			printf ("Loaded %s at 0x%05X (%lu KB)\n", filename, addr32, readsize >> 10);
+			printf ("Loaded %s at 0x%05X (%u KB)\n", filename, addr32, readsize >> 10);
 			return (readsize);
 		}
 }
@@ -303,16 +305,16 @@ int main (int argc, char *argv[]) {
 	killaudio();
 
 	if (renderbenchmark) {
-			printf ("\n%llu frames rendered in %llu seconds.\n", totalframes, endtick);
-			printf ("Average framerate: %llu FPS.\n", totalframes / endtick);
+			printf ("\n%" PRIu64 " frames rendered in %" PRIu64 "u seconds.\n", totalframes, endtick);
+			printf ("Average framerate: %" PRIu64 " FPS.\n", totalframes / endtick);
 		}
 
-	printf ("\n%llu instructions executed in %llu seconds.\n", totalexec, endtick);
-	printf ("Average speed: %llu instructions/second.\n", totalexec / endtick);
+	printf ("\n%" PRIu64 " instructions executed in %" PRIu64 " seconds.\n", totalexec, endtick);
+	printf ("Average speed: %" PRIu64 " instructions/second.\n", totalexec / endtick);
 
 #ifdef CPU_ADDR_MODE_CACHE
-	printf ("\n  Cached modregrm data access count: %llu\n", cached_access_count);
-	printf ("Uncached modregrm data access count: %llu\n", uncached_access_count);
+	printf ("\n  Cached modregrm data access count: %" PRIu64 "\n", cached_access_count);
+	printf ("Uncached modregrm data access count: %" PRIu64 "\n", uncached_access_count);
 #endif
 
 	if (useconsole)	exit (0); //makes sure console thread quits even if blocking

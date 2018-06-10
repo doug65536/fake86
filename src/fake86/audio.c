@@ -131,7 +131,8 @@ void initaudio() {
 			return;
 		}
 	else {
-			printf ("OK! (%lu Hz, %lu ms, %lu sample latency)\n", usesamplerate, latency, usebuffersize);
+			printf ("OK! (%u Hz, %u ms, %u sample latency)\n",
+                    usesamplerate, latency, usebuffersize);
 		}
 
 	memset (audbuf, 128, sizeof (audbuf) );
