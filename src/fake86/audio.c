@@ -62,14 +62,14 @@ void create_output_wav (char *filename) {
 	wav_hdr.bitsPerSample = 8;
 	wav_hdr.blockAlign = 1;
 	wav_hdr.ChunkSize = sizeof (wav_hdr) - 4;
-	sprintf (&wav_hdr.WAVE[0], "WAVE");
-	sprintf (&wav_hdr.fmt[0], "fmt ");
+	memcpy (&wav_hdr.WAVE[0], "WAVE", 4);
+	memcpy (&wav_hdr.fmt[0], "fmt ", 4);
 	wav_hdr.NumOfChan = 1;
 	wav_hdr.bytesPerSec = usesamplerate * (uint32_t) (wav_hdr.bitsPerSample >> 3) * (uint32_t) wav_hdr.NumOfChan;
-	sprintf (&wav_hdr.RIFF[0], "RIFF");
+	memcpy (&wav_hdr.RIFF[0], "RIFF", 4);
 	wav_hdr.Subchunk1Size = 16;
 	wav_hdr.SamplesPerSec = usesamplerate;
-	sprintf (&wav_hdr.Subchunk2ID[0], "data");
+	memcpy (&wav_hdr.Subchunk2ID[0], "data", 4);
 	wav_hdr.Subchunk2Size = 0;
 	//fwrite((void *)&wav_hdr, 1, sizeof(wav_hdr), wav_file);
 }

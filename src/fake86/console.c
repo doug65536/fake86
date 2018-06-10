@@ -75,7 +75,7 @@ void waitforcmd (char *dst, uint16_t maxlen) {
 			SDL_Delay(10); //don't waste CPU time while in the polling loop
 		}
 #else
-	gets (dst);
+	fgets (dst, maxlen, stdin);
 #endif
 }
 
