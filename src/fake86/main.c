@@ -76,7 +76,7 @@ uint32_t loadbinary (uint32_t addr32, uint8_t *filename, uint8_t roflag) {
 	fseek (binfile, 0, SEEK_END);
 	readsize = ftell (binfile);
 	fseek (binfile, 0, SEEK_SET);
-	fread ( (void *) &RAM[addr32], 1, readsize, binfile);
+	readsize = fread ( (void *) &RAM[addr32], 1, readsize, binfile);
 	fclose (binfile);
 
 	memset ( (void *) &readonly[addr32], roflag, readsize);
@@ -110,7 +110,7 @@ uint32_t loadbios (uint8_t *filename) {
 	fseek (binfile, 0, SEEK_END);
 	readsize = ftell (binfile);
 	fseek (binfile, 0, SEEK_SET);
-	fread ( (void *) &RAM[0x100000 - readsize], 1, readsize, binfile);
+	readsize = fread ( (void *) &RAM[0x100000 - readsize], 1, readsize, binfile);
 	fclose (binfile);
 
 	memset ( (void *) &readonly[0x100000 - readsize], 1, readsize);
