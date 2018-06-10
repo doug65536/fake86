@@ -33,7 +33,8 @@ extern struct struct_drive disk[256];
 #define strcmpi _strcmpi
 #endif
 
-extern uint8_t bootdrive, ethif, verbose, cgaonly, *biosfile, usessource, noscale, nosmooth, renderbenchmark, useconsole, doaudio;
+extern uint8_t bootdrive, ethif, verbose, cgaonly, usessource, noscale, nosmooth, renderbenchmark, useconsole, doaudio;
+char *biosfile;
 extern uint32_t framedelay, textbase, usefullscreen, speed;
 extern int32_t usesamplerate, latency;
 uint16_t constantw = 0, constanth = 0;

@@ -49,7 +49,7 @@ extern int16_t getssourcebyte();
 extern int16_t getBlasterSample();
 extern uint8_t usessource;
 
-void create_output_wav (uint8_t *filename) {
+void create_output_wav (char *filename) {
 	printf ("Creating %s for audio logging... ", filename);
 	wav_file = fopen (filename, "wb");
 	if (wav_file == NULL) {
@@ -75,7 +75,7 @@ void create_output_wav (uint8_t *filename) {
 }
 
 uint64_t doublesamplecount, cursampnum = 0, sampcount = 0, framecount = 0;
-uint8_t bmpfilename[256];
+char bmpfilename[256];
 
 void savepic() {
 	SDL_SaveBMP (screen, &bmpfilename[0]);
