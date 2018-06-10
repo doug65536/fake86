@@ -123,7 +123,7 @@ void initaudio() {
 	wanted.format = AUDIO_U8;
 	wanted.channels = 1;
 	wanted.samples = (uint16_t) usebuffersize >> 1;
-	wanted.callback = (void *) fill_audio;
+	wanted.callback = fill_audio;
 	wanted.userdata = NULL;
 
 	if (SDL_OpenAudio (&wanted, NULL) <0) {
