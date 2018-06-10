@@ -49,7 +49,7 @@ extern void reset86();
 extern void exec86 (uint32_t execloops);
 extern uint8_t initscreen (uint8_t *ver);
 extern void VideoThread();
-extern doscrmodechange();
+extern void doscrmodechange();
 extern void handleinput();
 
 #ifdef CPU_ADDR_MODE_CACHE
