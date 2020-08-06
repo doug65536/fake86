@@ -76,6 +76,10 @@ void waitforcmd (char *dst, uint16_t maxlen) {
 		}
 #else
 	fgets (dst, maxlen, stdin);
+	char *newl = strchr(dst, '\n');
+	if (newl) {
+		*newl = 0;	// wipe out potential-new-line character
+	}
 #endif
 }
 
