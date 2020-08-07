@@ -72,6 +72,7 @@ uint8_t initscreen (uint8_t *ver) {
 	else {
 			if (SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER) ) return (0);
 		}
+	SDL_EnableKeyRepeat( 0+1*SDL_DEFAULT_REPEAT_DELAY, 0+1*SDL_DEFAULT_REPEAT_INTERVAL);
 	screen = SDL_SetVideoMode (640, 400, 32, SDL_HWSURFACE);
 	if (screen == NULL) return (0);
 	sprintf (windowtitle, "%s", ver);
